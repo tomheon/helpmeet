@@ -1,0 +1,10 @@
+https://gist.github.com/meskarune/63600e64df56a607efa211b9a87fb443
+
+see how to parse with icalendar and see if a meeting falls within a certain time using RRULE
+
+basically, do a .walk(), look for VEVENTS, look at attendees etc., start to roll shit up
+
+* make sure to note for people that you want to clean up your calendar if you want decent results, e.g. things that everyone else said no to, you're the organizer, but you left them on the calendar
+
+you want your calendar to reflect reality, basically
+

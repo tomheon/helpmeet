@@ -1,0 +1,18 @@
+
+-*-*-*-
+Reports for calendar {{ calendar_name }} {{ start_date }}-{{ end_date }}
+-*-*-*-
+{% for report, data in reports %}
+
+{{ report }}
+{{ "-" * report|length }}
+{% if data %}
+{{ data['columns']|join(' | ') }}
+{% for row in data['rows'] %}
+{{ row|join(' | ') }}
+{% endfor %}
+{% else %}
+No data
+{% endif %}
+{% endfor %}
+
