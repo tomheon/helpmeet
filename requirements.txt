@@ -1,5 +1,7 @@
 attrs==19.3.0
 icalendar==4.0.6
+Jinja2==2.11.2
+MarkupSafe==1.1.1
 more-itertools==8.4.0
 packaging==20.4
 pluggy==0.13.1
