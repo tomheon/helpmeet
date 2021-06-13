@@ -2,6 +2,8 @@ create table vevents (
   vevent_id integer primary key,
   uid text,
   summary text,
+  description text,
+  location text,
   dtstart text,
   dtend text,
   is_recurring integer,

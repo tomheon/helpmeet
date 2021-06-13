@@ -42,12 +42,14 @@ def safe_dt(v, field):
 def store_vevent(db, v, default_attendee):
     db.execute("""
                insert into vevents 
-                 (uid, summary, dtstart, dtend, is_recurring, organizer)
+                 (uid, summary, description, location, dtstart, dtend, is_recurring, organizer)
                  values 
-                 (?, ?, ?, ?, ?, ?)
+                 (?, ?, ?, ?, ?, ?, ?, ?)
                """,
                (v.get('uid'),
                 v.get('summary'),
+                v.get('description'),
+                v.get('location'),
                 safe_dt(v, 'dtstart'),
                 safe_dt(v, 'dtend'),
                 bool(v.get('recurrence-id')),
@@ -94,7 +96,7 @@ def main():
 
     args = parser.parse_args()
     with repo.init(args.db_file) as db:
-        extract_from_file(ical_file, args.start_date, args.end_date, args.calendar_owner, db)
+        extract_from_file(args.ical_file, args.start_date, args.end_date, args.calendar_owner, db)
 
 
 if __name__ == '__main__':
