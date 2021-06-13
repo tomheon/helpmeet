@@ -40,6 +40,7 @@ def to_dict(e):
 def augment_events(events):
     return [augment(to_dict(e)) for e in events]
 
+
 def select_vevents(db):
     db.execute("""select
                     vevent_id, 
@@ -58,18 +59,20 @@ def select_vevents(db):
     return dict(events=augment_events(res))
 
 
-def render_org_agenda(db):
+def render_org_agenda(date, db):
     extra_context = select_vevents(db)
+    extra_context['date'] = date
     return template_variables.render_file(db, ORG_FORMAT_FILE, extra_context=extra_context)
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("db_file")
+    parser.add_argument("date")
 
     args = parser.parse_args()
     with repo.connect(args.db_file) as db:
-        print(render_org_agenda(db))
+        print(render_org_agenda(args.date, db))
 
     
 
