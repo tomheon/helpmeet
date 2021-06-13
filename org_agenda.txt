@@ -1,0 +1,22 @@
+#+STARTUP: overview
+{% for event in events -%}
+{{ '' }}
+* {{ event['summary'] }}
+{{ event['time'] }}
+{% if event['description'] %}
+:DESCRIPTION:
+{{ event['description'] }}
+:END:
+{% endif %}
+{% if event['location'] %}
+:LOCATION:
+{{ event['location'] }}
+:END:
+{% endif %}
+:ATTENDEES:
+{% for a in event['attendees'] %}
+- {{ a }}
+{% endfor %}
+:END:
+** Notes
+{% endfor %}
