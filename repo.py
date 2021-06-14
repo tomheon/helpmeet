@@ -1,9 +1,11 @@
 import contextlib
 import sqlite3
 
+import path 
+
 
 def create_schema(db):
-    with open('schema.sql', 'rb') as fh:
+    with open(path.relative_file_name('schema.sql'), 'rb') as fh:
         db.executescript(fh.read().decode('utf-8'))
 
 

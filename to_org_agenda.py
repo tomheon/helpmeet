@@ -6,10 +6,12 @@ from pytz import timezone, utc, all_timezones
 from tzlocal import get_localzone
 
 import template_variables
+import path
 import repo
 
 
 ORG_FORMAT_FILE = "org_agenda.txt"
+
 
 def to_org_datetime(dt):
     tz = get_localzone()
@@ -62,14 +64,14 @@ def select_vevents(db):
 def render_org_agenda(date, db):
     extra_context = select_vevents(db)
     extra_context['date'] = date
-    return template_variables.render_file(db, ORG_FORMAT_FILE, extra_context=extra_context)
+    return template_variables.render_file(db, path.relative_file_name(ORG_FORMAT_FILE), extra_context=extra_context)
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("db_file")
     parser.add_argument("date")
-
+    parser.add_argument("db_file")
+    
     args = parser.parse_args()
     with repo.connect(args.db_file) as db:
         print(render_org_agenda(args.date, db))
