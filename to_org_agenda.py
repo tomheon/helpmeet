@@ -56,7 +56,7 @@ def select_vevents(db):
                   from 
                     vevents natural join attendees
                   group by vevent_id
-                  order by dtstart""")
+                  order by julianday(dtstart)""")
     res = db.fetchall()
     return dict(events=augment_events(res))
 
