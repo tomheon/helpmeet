@@ -19,7 +19,7 @@
 - {{ a }}
 {% endfor %}
 :END:
-** Notes
+** Notes :t:
 
-** Followup
+** Followup :t:
 {% endfor %}
