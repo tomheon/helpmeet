@@ -2,3 +2,4 @@ venv
 *~
 localdev
 __pycache__
+emails-to-names.csv

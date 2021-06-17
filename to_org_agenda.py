@@ -67,12 +67,22 @@ def render_org_agenda(date, db):
     return template_variables.render_file(db, path.relative_file_name(ORG_FORMAT_FILE), extra_context=extra_context)
 
 
+def parse_emails_to_names(file_name):
+    if not file_name:
+        return dict()
+    
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("date")
     parser.add_argument("db_file")
+    parser.add_argument("--emails-to-names")
     
     args = parser.parse_args()
+
+    emails_to_names = parse_emails_to_names(args.emails_to_names)
+
     with repo.connect(args.db_file) as db:
         print(render_org_agenda(args.date, db))
 
