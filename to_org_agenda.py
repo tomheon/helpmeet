@@ -1,5 +1,6 @@
 import argparse
 from datetime import datetime
+import uuid
 import re
 
 from pytz import timezone, utc, all_timezones
@@ -61,9 +62,10 @@ def select_vevents(db):
     return dict(events=augment_events(res))
 
 
-def render_org_agenda(date, db):
+def render_org_agenda(date, uniq_id, db):
     extra_context = select_vevents(db)
     extra_context['date'] = date
+    extra_context['uuid'] = uniq_id
     return template_variables.render_file(db, path.relative_file_name(ORG_FORMAT_FILE), extra_context=extra_context)
 
 
@@ -74,7 +76,7 @@ def main():
     
     args = parser.parse_args()
     with repo.connect(args.db_file) as db:
-        print(render_org_agenda(args.date, db))
+        print(render_org_agenda(args.date, uuid.uuid1(), db))
 
     
 

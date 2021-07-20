@@ -1,3 +1,6 @@
+:PROPERTIES:
+:ID:       {{ uuid }}
+:END:
 #+title: {{ date }}
 #+STARTUP: overview
 {% for event in events -%}
