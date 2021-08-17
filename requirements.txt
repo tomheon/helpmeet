@@ -13,3 +13,5 @@ pytz==2020.1
 recurring-ical-events==0.1.17b0
 six==1.15.0
 wcwidth==0.2.5
+tzlocal==3.0
+
