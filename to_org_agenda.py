@@ -1,5 +1,9 @@
 import argparse
 from datetime import datetime
+import calendar
+
+import dateutil.parser
+from dateutil.parser import *
 import uuid
 import re
 
@@ -66,14 +70,18 @@ def render_org_agenda(date, uniq_id, db):
     extra_context = select_vevents(db)
     extra_context['date'] = date
     extra_context['uuid'] = uniq_id
+    extra_context['day_of_week'] = day_of_week_from(date)
     return template_variables.render_file(db, path.relative_file_name(ORG_FORMAT_FILE), extra_context=extra_context)
 
+def day_of_week_from(date):
+    date = dateutil.parser.parse(date)
+    return calendar.day_name[date.weekday()]
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("date")
     parser.add_argument("db_file")
-    
+
     args = parser.parse_args()
     with repo.connect(args.db_file) as db:
         print(render_org_agenda(args.date, uuid.uuid1(), db))

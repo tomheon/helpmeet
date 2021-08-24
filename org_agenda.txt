@@ -1,11 +1,14 @@
 :PROPERTIES:
 :ID:       {{ uuid }}
 :END:
-#+title: {{ date }}
-#+STARTUP: overview
+#+title: {{ date }} ({{ day_of_week }})
+#+STARTUP: showall
+* [/] Do Today
+* [/] Maybe do Today
+* Events
 {% for event in events -%}
 {{ '' }}
-* {{ event['summary'] }}
+** {{ event['summary'] }}
 {{ event['time'] }}
 {% if event['description'] %}
 :DESCRIPTION:
@@ -22,8 +25,9 @@
 - {{ a }}
 {% endfor %}
 :END:
-** Notes
+*** Notes
 
-** Followup
+*** Followup
 
 {% endfor %}
+* Journal
