@@ -1,8 +1,10 @@
+{% if uuid %}
 :PROPERTIES:
 :ID:       {{ uuid }}
 :END:
 #+title: {{ date }}
 #+STARTUP: overview
+{% endif %}
 {% for event in events -%}
 {{ '' }}
 * {{ event['summary'] }}

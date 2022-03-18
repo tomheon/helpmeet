@@ -71,12 +71,16 @@ def render_org_agenda(date, uniq_id, db):
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument('--no-header', action='store_true')
     parser.add_argument("date")
     parser.add_argument("db_file")
     
     args = parser.parse_args()
     with repo.connect(args.db_file) as db:
-        print(render_org_agenda(args.date, uuid.uuid1(), db))
+        u = None
+        if not args.no_header:
+            u = uuid.uuid1()
+        print(render_org_agenda(args.date, u, db))
 
     
 
